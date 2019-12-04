@@ -1,0 +1,1452 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "Untitled18.ipynb",
+      "provenance": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/supriyasri/PYTHON-MANIA-/blob/master/EDA\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "q-B9pkdwwO_v",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 132
+        },
+        "outputId": "2934eb80-fd30-40a4-f614-3e293e970e75"
+      },
+      "source": [
+        "EDA PART"
+      ],
+      "execution_count": 1,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "SyntaxError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;36m  File \u001b[0;32m\"<ipython-input-1-b3f1d9f77944>\"\u001b[0;36m, line \u001b[0;32m1\u001b[0m\n\u001b[0;31m    EDA PART\u001b[0m\n\u001b[0m           ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m invalid syntax\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "YTduOSSwwQsn",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 256
+        },
+        "outputId": "034e5087-11ab-4038-ab31-06b17f844ba0"
+      },
+      "source": [
+        "#import and Preview Data\n",
+        "building_metadata = pd.read_csv('/kaggle/input/ashrae-energy-prediction/building_metadata.csv')\n",
+        "weather_train = pd.read_csv('/kaggle/input/ashrae-energy-prediction/weather_train.csv')\n",
+        "train = pd.read_csv('/kaggle/input/ashrae-energy-prediction/train.csv')\n",
+        "weather_test = pd.read_csv('/kaggle/input/ashrae-energy-prediction/weather_test.csv')\n",
+        "test = pd.read_csv('/kaggle/input/ashrae-energy-prediction/test.csv')"
+      ],
+      "execution_count": 2,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "NameError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-2-e3c6ef19d292>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0mbuilding_metadata\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mpd\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mread_csv\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'/kaggle/input/ashrae-energy-prediction/building_metadata.csv'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m      2\u001b[0m \u001b[0mweather_train\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mpd\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mread_csv\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'/kaggle/input/ashrae-energy-prediction/weather_train.csv'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      3\u001b[0m \u001b[0mtrain\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mpd\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mread_csv\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'/kaggle/input/ashrae-energy-prediction/train.csv'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      4\u001b[0m \u001b[0mweather_test\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mpd\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mread_csv\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'/kaggle/input/ashrae-energy-prediction/weather_test.csv'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      5\u001b[0m \u001b[0mtest\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mpd\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mread_csv\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'/kaggle/input/ashrae-energy-prediction/test.csv'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;31mNameError\u001b[0m: name 'pd' is not defined"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Dd9gK-Cawnx-",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 184
+        },
+        "outputId": "9316c67b-7271-4b37-c01c-a837c1d75527"
+      },
+      "source": [
+        "print('The shape of Building Metadata is :',building_metadata.shape)\n",
+        "building_metadata.head()"
+      ],
+      "execution_count": 3,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "NameError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-3-e1bd7a15a9a4>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0mprint\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'The shape of Building Metadata is :'\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0mbuilding_metadata\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mshape\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m      2\u001b[0m \u001b[0mbuilding_metadata\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mhead\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;31mNameError\u001b[0m: name 'building_metadata' is not defined"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "JLGb0P_cwrQE",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 236
+        },
+        "outputId": "6ac05eb5-c4a4-4a49-b5fe-c9db2f5f6ec4"
+      },
+      "source": [
+        "print('The shape of weather_train data is :',weather_train.shape)\n",
+        "weather_train.head()\n",
+        "print('The shape of train data is :',train.shape)\n",
+        "train.head()\n",
+        "print('The shape of weather_test data is :',weather_test.shape)\n",
+        "weather_test.head()\n",
+        "print('The shape of test data is :',test.shape)\n",
+        "test.head()\n",
+        "print('Number of Buildings :', len(building_metadata.building_id.unique()))"
+      ],
+      "execution_count": 6,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "NameError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-6-469b40e6ca58>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0mprint\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'The shape of weather_train data is :'\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0mweather_train\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mshape\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m      2\u001b[0m \u001b[0mweather_train\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mhead\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      3\u001b[0m \u001b[0mprint\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'The shape of train data is :'\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0mtrain\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mshape\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      4\u001b[0m \u001b[0mtrain\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mhead\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      5\u001b[0m \u001b[0mprint\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'The shape of weather_test data is :'\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0mweather_test\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mshape\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;31mNameError\u001b[0m: name 'weather_train' is not defined"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "PWreWojGwuYR",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 219
+        },
+        "outputId": "bec226e7-f665-4f85-8ff3-c4f001409821"
+      },
+      "source": [
+        "print('Number of Sites and number of Buildings in Each site')\n",
+        "print(building_metadata.site_id.unique())\n",
+        "print(building_metadata.site_id.value_counts().sort_index())\n"
+      ],
+      "execution_count": 7,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "Number of Sites and number of Buildings in Each site\n"
+          ],
+          "name": "stdout"
+        },
+        {
+          "output_type": "error",
+          "ename": "NameError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-7-61fc14476233>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[1;32m      1\u001b[0m \u001b[0mprint\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'Number of Sites and number of Buildings in Each site'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m----> 2\u001b[0;31m \u001b[0mprint\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mbuilding_metadata\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0msite_id\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0munique\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m      3\u001b[0m \u001b[0mprint\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mbuilding_metadata\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0msite_id\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mvalue_counts\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0msort_index\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;31mNameError\u001b[0m: name 'building_metadata' is not defined"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "3WotAp-_xCCp",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 236
+        },
+        "outputId": "e9859739-b172-4931-e0cb-17734c6ee7fe"
+      },
+      "source": [
+        "building_count = building_metadata.primary_use.value_counts()\n",
+        "print('Number of Buildings by Primary Use:')\n",
+        "plt.figure(figsize=(15,3))\n",
+        "sns.barplot(building_count.index,building_metadata.primary_use.value_counts())\n",
+        "plt.xticks(rotation = 90)\n",
+        "plt.ylabel('Number of Buildings')"
+      ],
+      "execution_count": 8,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "NameError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-8-079b139a23bc>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0mbuilding_count\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mbuilding_metadata\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mprimary_use\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mvalue_counts\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m      2\u001b[0m \u001b[0mprint\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'Number of Buildings by Primary Use:'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      3\u001b[0m \u001b[0mplt\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mfigure\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mfigsize\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;36m15\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;36m3\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      4\u001b[0m \u001b[0msns\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mbarplot\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mbuilding_count\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mindex\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0mbuilding_metadata\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mprimary_use\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mvalue_counts\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      5\u001b[0m \u001b[0mplt\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mxticks\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mrotation\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;36m90\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;31mNameError\u001b[0m: name 'building_metadata' is not defined"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "QNwg3h3xxHzw",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 152
+        },
+        "outputId": "37327216-59e9-4878-d515-1cdcb85f42c0"
+      },
+      "source": [
+        "The train and test sets have millions of rows with a huge size in GBs. We will reduce the size of the dataframes for better performance.\n",
+        "def reduce_mem_usage(df, verbose=True):\n",
+        "    numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']\n",
+        "    start_mem = df.memory_usage().sum() / 1024**2    \n",
+        "    for col in df.columns:\n",
+        "        col_type = df[col].dtypes\n",
+        "        if col_type in numerics:\n",
+        "            c_min = df[col].min()\n",
+        "            c_max = df[col].max()\n",
+        "            if str(col_type)[:3] == 'int':\n",
+        "                if c_min > np.iinfo(np.int8).min and c_max < np.iinfo(np.int8).max:\n",
+        "                    df[col] = df[col].astype(np.int8)\n",
+        "                elif c_min > np.iinfo(np.int16).min and c_max < np.iinfo(np.int16).max:\n",
+        "                    df[col] = df[col].astype(np.int16)\n",
+        "                elif c_min > np.iinfo(np.int32).min and c_max < np.iinfo(np.int32).max:\n",
+        "                    df[col] = df[col].astype(np.int32)\n",
+        "                elif c_min > np.iinfo(np.int64).min and c_max < np.iinfo(np.int64).max:\n",
+        "                    df[col] = df[col].astype(np.int64)  \n",
+        "            else:\n",
+        "                if c_min > np.finfo(np.float16).min and c_max < np.finfo(np.float16).max:\n",
+        "                    df[col] = df[col].astype(np.float16)\n",
+        "                elif c_min > np.finfo(np.float32).min and c_max < np.finfo(np.float32).max:\n",
+        "                    df[col] = df[col].astype(np.float32)\n",
+        "                else:\n",
+        "                    df[col] = df[col].astype(np.float64)    \n",
+        "    end_mem = df.memory_usage().sum() / 1024**2\n",
+        "    if verbose: print('Mem. usage decreased to {:5.2f} Mb ({:.1f}% reduction)'.format(end_mem, 100 * (start_mem - end_mem) / start_mem))\n",
+        "    return df"
+      ],
+      "execution_count": 9,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "SyntaxError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;36m  File \u001b[0;32m\"<ipython-input-9-a2790ff03bfc>\"\u001b[0;36m, line \u001b[0;32m1\u001b[0m\n\u001b[0;31m    The train and test sets have millions of rows with a huge size in GBs. We will reduce the size of the dataframes for better performance.\u001b[0m\n\u001b[0m            ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m invalid syntax\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "9rb8kOaRxSgE",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 236
+        },
+        "outputId": "44f93817-1ce0-4372-aa37-29b14c4a4f58"
+      },
+      "source": [
+        "## Reducing memory of the data frames\n",
+        "building_metadata = reduce_mem_usage(building_metadata)\n",
+        "train = reduce_mem_usage(train)\n",
+        "weather_train = reduce_mem_usage(weather_train)\n",
+        "weather_test = reduce_mem_usage(weather_test)\n",
+        "test = reduce_mem_usage(test)"
+      ],
+      "execution_count": 10,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "NameError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-10-9d259dd1e05a>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0mbuilding_metadata\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mreduce_mem_usage\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mbuilding_metadata\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m      2\u001b[0m \u001b[0mtrain\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mreduce_mem_usage\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mtrain\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      3\u001b[0m \u001b[0mweather_train\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mreduce_mem_usage\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mweather_train\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      4\u001b[0m \u001b[0mweather_test\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mreduce_mem_usage\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mweather_test\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      5\u001b[0m \u001b[0mtest\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mreduce_mem_usage\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mtest\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;31mNameError\u001b[0m: name 'reduce_mem_usage' is not defined"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "YTkxkL3OxVLp",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 236
+        },
+        "outputId": "3d3b74a4-ddf7-42a4-eb74-fc52e6f4b611"
+      },
+      "source": [
+        "# First merge train and building data\n",
+        "train = pd.merge(train,building_metadata,how = 'left')           \n",
+        "print(train.shape)\n",
+        "train.head()\n",
+        "\n",
+        "# Now Merge train_building with weather_train data\n",
+        "train = pd.merge(train,weather_train, on = ['site_id','timestamp'], how = 'left')\n",
+        "print(train.shape)\n",
+        "train.head()"
+      ],
+      "execution_count": 11,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "NameError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-11-62c48f278934>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0mtrain\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mpd\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mmerge\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mtrain\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0mbuilding_metadata\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0mhow\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;34m'left'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m      2\u001b[0m \u001b[0mprint\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mtrain\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mshape\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      3\u001b[0m \u001b[0mtrain\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mhead\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      4\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      5\u001b[0m \u001b[0;31m# Now Merge train_building with weather_train data\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;31mNameError\u001b[0m: name 'pd' is not defined"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "txfZ5CbGxZBw",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 236
+        },
+        "outputId": "94a222c3-00b3-4c28-c49d-7fac9703a98b"
+      },
+      "source": [
+        "# First merge test and building data\n",
+        "test = pd.merge(test,building_metadata,how = 'left')           \n",
+        "print(test.shape)\n",
+        "test.head()\n",
+        "\n",
+        "# Now Merge test_building with weather_test data\n",
+        "test = pd.merge(test,weather_test, on = ['site_id','timestamp'], how = 'left')\n",
+        "print(test.shape)\n",
+        "test.head()"
+      ],
+      "execution_count": 12,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "NameError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-12-d16960ea6711>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0mtest\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mpd\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mmerge\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mtest\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0mbuilding_metadata\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0mhow\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;34m'left'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m      2\u001b[0m \u001b[0mprint\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mtest\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mshape\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      3\u001b[0m \u001b[0mtest\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mhead\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      4\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      5\u001b[0m \u001b[0;31m# Now Merge test_building with weather_test data\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;31mNameError\u001b[0m: name 'pd' is not defined"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "dknyC_Gpxbf0",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 184
+        },
+        "outputId": "8de1746c-6150-46a4-aa65-3af9dcbcf893"
+      },
+      "source": [
+        "train['timestamp'] = pd.to_datetime(train.timestamp)\n",
+        "test['timestamp'] = pd.to_datetime(test.timestamp)"
+      ],
+      "execution_count": 13,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "NameError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-13-0f1c98452d44>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0mtrain\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m'timestamp'\u001b[0m\u001b[0;34m]\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mpd\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mto_datetime\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mtrain\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mtimestamp\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m      2\u001b[0m \u001b[0mtest\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m'timestamp'\u001b[0m\u001b[0;34m]\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mpd\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mto_datetime\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mtest\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mtimestamp\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;31mNameError\u001b[0m: name 'pd' is not defined"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "PC6TvnqjxcA4",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 221
+        },
+        "outputId": "f0539c06-37f1-4fa1-831f-96cf29c3c1a6"
+      },
+      "source": [
+        "def report_missing_data(df):\n",
+        "    print('Total Number of rows :', len(df))\n",
+        "    for column in df.columns:\n",
+        "        print(column,':', 'Missing rows:', sum(df[column].isnull()), '|', '% Missing: {:.2f}'.format(sum(df[column].isnull())*100/len(df)),'%')\n",
+        "report_missing_data(train)"
+      ],
+      "execution_count": 14,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "NameError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-14-fb6d7cff7389>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[1;32m      3\u001b[0m     \u001b[0;32mfor\u001b[0m \u001b[0mcolumn\u001b[0m \u001b[0;32min\u001b[0m \u001b[0mdf\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mcolumns\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      4\u001b[0m         \u001b[0mprint\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mcolumn\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;34m':'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'Missing rows:'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0msum\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mdf\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0mcolumn\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0misnull\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'|'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'% Missing: {:.2f}'\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mformat\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0msum\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mdf\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0mcolumn\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0misnull\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m*\u001b[0m\u001b[0;36m100\u001b[0m\u001b[0;34m/\u001b[0m\u001b[0mlen\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mdf\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;34m'%'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m----> 5\u001b[0;31m \u001b[0mreport_missing_data\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mtrain\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m: name 'train' is not defined"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "oL9jQC1Cxh52",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 236
+        },
+        "outputId": "fcc87114-b402-42d4-ae3a-49df19870ac3"
+      },
+      "source": [
+        "# Get month, day, weekday,weekday name, hour etc. from the datetime object - timestamp.\n",
+        "train['month'] = train.timestamp.dt.month\n",
+        "train['day'] = train.timestamp.dt.day\n",
+        "train['weekday'] = train.timestamp.dt.weekday\n",
+        "train['hour'] = train.timestamp.dt.hour\n",
+        "train['weekday_name'] = train.timestamp.dt.weekday_name\n",
+        "\n",
+        "# Get meter names from codes for better understanding\n",
+        "meter_dict = {0: 'electricity', 1: 'chilledwater', 2: 'steam', 3: 'hotwater'}\n",
+        "train['meter_name'] = train.meter.map(meter_dict)\n",
+        "\n",
+        "# Calculate elapsed years for each building\n",
+        "train['meter_year'] = train.timestamp.dt.year \n",
+        "train['elapsed_years'] = train.meter_year - train.year_built\n",
+        "\n",
+        "train.head()"
+      ],
+      "execution_count": 15,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "NameError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-15-1603ce980267>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0mtrain\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m'month'\u001b[0m\u001b[0;34m]\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mtrain\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mtimestamp\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mdt\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mmonth\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m      2\u001b[0m \u001b[0mtrain\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m'day'\u001b[0m\u001b[0;34m]\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mtrain\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mtimestamp\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mdt\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mday\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      3\u001b[0m \u001b[0mtrain\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m'weekday'\u001b[0m\u001b[0;34m]\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mtrain\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mtimestamp\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mdt\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mweekday\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      4\u001b[0m \u001b[0mtrain\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m'hour'\u001b[0m\u001b[0;34m]\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mtrain\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mtimestamp\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mdt\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mhour\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      5\u001b[0m \u001b[0mtrain\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m'weekday_name'\u001b[0m\u001b[0;34m]\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mtrain\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mtimestamp\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mdt\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mweekday_name\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;31mNameError\u001b[0m: name 'train' is not defined"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "2k5xPa4SxllY",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 167
+        },
+        "outputId": "1a033f3a-80d8-4f36-fba2-1d1164456b37"
+      },
+      "source": [
+        "# Reduce the size of merged train data\n",
+        "train = reduce_mem_usage(train)"
+      ],
+      "execution_count": 16,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "NameError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-16-4a6174429341>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0mtrain\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mreduce_mem_usage\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mtrain\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m: name 'reduce_mem_usage' is not defined"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "ToGHx2mnxmIg",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 132
+        },
+        "outputId": "ee1c0ce0-8a82-4fee-f99d-7e50a78ef9a8"
+      },
+      "source": [
+        "Check the distribution of the target variable\n",
+        "sns.distplot(train.meter_reading, kde = False)\n"
+      ],
+      "execution_count": 17,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "SyntaxError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;36m  File \u001b[0;32m\"<ipython-input-17-2cdf8b057b7f>\"\u001b[0;36m, line \u001b[0;32m1\u001b[0m\n\u001b[0;31m    Check the distribution of the target variable\u001b[0m\n\u001b[0m            ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m invalid syntax\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "qEetkYJKxsKL",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 152
+        },
+        "outputId": "ecf082ce-cea3-45d8-8fa1-447ab8853c84"
+      },
+      "source": [
+        "There are too many meter readings with value of zero and hence confounding actual distribution. We can deal with such outliers through two ways\n",
+        "\n",
+        "Outlier removal, based on outlier thresholds or setting IQR thresholds above or below which observations are treated as outliers.\n",
+        "Apply Log Transformation to bring the points closer so that the outliers are squished in, and other observations become visible.\n",
+        "We will use the Log transform approach and re-display the target variable - 'meter_reading' distribution."
+      ],
+      "execution_count": 18,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "SyntaxError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;36m  File \u001b[0;32m\"<ipython-input-18-ba7649022831>\"\u001b[0;36m, line \u001b[0;32m1\u001b[0m\n\u001b[0;31m    There are too many meter readings with value of zero and hence confounding actual distribution. We can deal with such outliers through two ways\u001b[0m\n\u001b[0m            ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m invalid syntax\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "fZ7O_2qjxw3c",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 184
+        },
+        "outputId": "97e4594e-e194-49cd-ffba-0eb525633203"
+      },
+      "source": [
+        "# plot hist of log transformed target variable\n",
+        "train['log_meter_reading'] = np.log(train.meter_reading + 1)\n",
+        "sns.distplot(train.log_meter_reading)"
+      ],
+      "execution_count": 19,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "NameError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-19-f22f569ec7cc>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0mtrain\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m'log_meter_reading'\u001b[0m\u001b[0;34m]\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mnp\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mlog\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mtrain\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mmeter_reading\u001b[0m \u001b[0;34m+\u001b[0m \u001b[0;36m1\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m      2\u001b[0m \u001b[0msns\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mdistplot\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mtrain\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mlog_meter_reading\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;31mNameError\u001b[0m: name 'np' is not defined"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Q9GvGLCyx4ok",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 132
+        },
+        "outputId": "9959e7eb-fc63-4337-ab62-3772d6709a55"
+      },
+      "source": [
+        "1.1 Analyze Energy Consumption based on Primary Use\n",
+        "\n",
+        "train.groupby('primary_use')['building_id'].nunique().sort_values(ascending = False).plot(kind = 'bar', figsize = (20,6), color = 'purple', title = 'Count of Buildings by Primary use')\n",
+        "plt.subplot(1,3,1)\n",
+        "train.groupby('primary_use')['meter_reading'].sum().sort_values(ascending = False).plot(kind = 'bar', figsize = (20,6), color = 'green', title = 'Total Energy consumption by Primary use')\n",
+        "plt.subplot(1,3,3)\n",
+        "train.groupby('primary_use')['meter_reading'].mean().sort_values(ascending = False).plot(kind = 'bar', figsize = (20,6), color = 'green', title = 'Mean Energy consumption by Primary use')\n",
+        "plt.tight_layout()\n"
+      ],
+      "execution_count": 20,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "SyntaxError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;36m  File \u001b[0;32m\"<ipython-input-20-ea81b63b9d7a>\"\u001b[0;36m, line \u001b[0;32m1\u001b[0m\n\u001b[0;31m    1.1 Analyze Energy Consumption based on Primary Use\u001b[0m\n\u001b[0m              ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m invalid syntax\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "ZsiRJo2hx7qs",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 152
+        },
+        "outputId": "545f1f2c-d9f1-4f5d-fdb4-453fc25e4ae1"
+      },
+      "source": [
+        "The ideal candidates for piloting energy consumption initiatives could be those which have more energy consumption across lesser number of buildings.\n",
+        "\n",
+        "Education and Services have the highest mean energy consumption. While Education also has the maximum total as well as mean energy consumption, Services while having few buildings have second highest mean consumption. Service buildings while being fewer in number can contribute to more energy savings.All other buildings have far less mean consumption.\n",
+        "\n",
+        "Lets look deeper into the 'mean consumption by primary use' plot and try to break it down based on which meter types contribute to more consumption in each of these primary use building type."
+      ],
+      "execution_count": 21,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "SyntaxError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;36m  File \u001b[0;32m\"<ipython-input-21-19ea93e618e4>\"\u001b[0;36m, line \u001b[0;32m1\u001b[0m\n\u001b[0;31m    The ideal candidates for piloting energy consumption initiatives could be those which have more energy consumption across lesser number of buildings.\u001b[0m\n\u001b[0m            ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m invalid syntax\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "dam68FHGx_PV",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 132
+        },
+        "outputId": "a87f83ef-07f9-4b96-8938-e40809ba93dc"
+      },
+      "source": [
+        "1.2 Energy Consumption by Primary Use by Meter Type\n",
+        "#train.groupby(['primary_use','meter'])['meter_reading'].mean().sort_values(ascending = False).reset_index().plot(kind = 'bar', figsize = (20,6), color = 'green', title = 'Mean Energy consumption by Primary use')\n",
+        "pivot_df = train.groupby(['primary_use','meter_name'])['meter_reading'].mean().sort_values(ascending = False).reset_index()\n",
+        "pivot_df.head()\n",
+        "pivot_df = pivot_df.pivot(index='primary_use', columns='meter_name', values='meter_reading')\n",
+        "pivot_df['AllMeters'] = pivot_df.sum(axis = 1)\n",
+        "pivot_df.sort_values('AllMeters', ascending = False).drop('AllMeters',axis = 1).plot(kind = 'bar', figsize = (20,10), colormap = 'Set1', title = 'Mean Hourly Energy consumption by Primary use by meter', stacked = True)\n",
+        "plt.tight_layout()"
+      ],
+      "execution_count": 22,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "SyntaxError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;36m  File \u001b[0;32m\"<ipython-input-22-d89e3c07b85d>\"\u001b[0;36m, line \u001b[0;32m1\u001b[0m\n\u001b[0;31m    1.2 Energy Consumption by Primary Use by Meter Type\u001b[0m\n\u001b[0m             ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m invalid syntax\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "ILjjYojsyG8W",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 152
+        },
+        "outputId": "4712922c-f593-47a2-da9f-ce584ac718ce"
+      },
+      "source": [
+        "Steam is more used than other meter types in Education, Services, Public Services, Health care, office, parking, Food sales, lodging, manufacturing etc. Also Looks like Steam consumption is more than 90% for the highest energy consuming buildings like Education, Services etc.\n",
+        "\n",
+        "Though Electricity meters are installed in maximum number of buildings, they seem to show much lower hourly average consumption. hot water seems to be the least used meter. Chilled water is more used in\n",
+        "\n",
+        "Lets look at the overall trend for the mean consumption by meter type - we would expect steam to be the most dominating meter type."
+      ],
+      "execution_count": 23,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "SyntaxError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;36m  File \u001b[0;32m\"<ipython-input-23-8dc70c71a5a7>\"\u001b[0;36m, line \u001b[0;32m1\u001b[0m\n\u001b[0;31m    Steam is more used than other meter types in Education, Services, Public Services, Health care, office, parking, Food sales, lodging, manufacturing etc. Also Looks like Steam consumption is more than 90% for the highest energy consuming buildings like Education, Services etc.\u001b[0m\n\u001b[0m                     ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m invalid syntax\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Nc9lop4VyJwf",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 132
+        },
+        "outputId": "57ed87a4-987e-4fa3-fe30-5a7e1e8b1406"
+      },
+      "source": [
+        ".1 Analyze Energy Consumption based on Meter used\n",
+        "\n",
+        "#plt.figure(figsize=(30,10))\n",
+        "plt.subplot(1,3,2)\n",
+        "train.groupby('meter_name')['building_id'].count().sort_values(ascending = False).plot(kind = 'bar', figsize = (15,6), color = 'purple', title = 'Count of Meter Type')\n",
+        "plt.subplot(1,3,1)\n",
+        "train.groupby('meter_name')['meter_reading'].sum().sort_values(ascending= False).plot(kind = 'bar', figsize = (15,6), color = 'green', title = 'Total Energy consumption by Meter Type' )\n",
+        "plt.subplot(1,3,3)\n",
+        "train.groupby('meter_name')['meter_reading'].mean().sort_values(ascending= False).plot(kind = 'bar', figsize = (15,6), color = 'green', title = 'Mean Energy consumption by Meter Type' )\n",
+        "plt.tight_layout()"
+      ],
+      "execution_count": 24,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "SyntaxError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;36m  File \u001b[0;32m\"<ipython-input-24-70878a409dc4>\"\u001b[0;36m, line \u001b[0;32m1\u001b[0m\n\u001b[0;31m    .1 Analyze Energy Consumption based on Meter used\u001b[0m\n\u001b[0m             ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m invalid syntax\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "2U970SVoyO0v",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 152
+        },
+        "outputId": "fe4e6153-0f5e-4cd6-d783-af0d8fe17adb"
+      },
+      "source": [
+        "Electricity meters are 3 times more used than chilled water and 4 times more used than steam and 6 times more used than hotwater.\n",
+        "\n",
+        "Inspite of that, Steam and Chilled water seem to be showing highest mean energy consumption in terms of Total as well as mean hourly energy consumption. Electricity meter has the lowest mean consumption while having total consumption slightly higher than hot water due to more meters being installed.\n",
+        "\n",
+        "Given the huge margin between Steam and Other Meter types, the overall trend for energy consumption will mostly likely be driven by Steam energy meters."
+      ],
+      "execution_count": 25,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "SyntaxError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;36m  File \u001b[0;32m\"<ipython-input-25-24cf802ae1c1>\"\u001b[0;36m, line \u001b[0;32m1\u001b[0m\n\u001b[0;31m    Electricity meters are 3 times more used than chilled water and 4 times more used than steam and 6 times more used than hotwater.\u001b[0m\n\u001b[0m                     ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m invalid syntax\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "oriQysybyRgD",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 132
+        },
+        "outputId": "12c7655c-1baf-425c-f8aa-504e97606586"
+      },
+      "source": [
+        ".1 Analyze mean energy consumption by time - by hours, days and months\n",
+        "fig, axes = plt.subplots(1, 1, figsize=(15, 6), dpi=100)\n",
+        "train[['timestamp', 'meter_reading']].set_index('timestamp').resample('H').mean()['meter_reading'].plot(ax=axes, label='By hour', alpha=0.8).set_ylabel('Meter reading', fontsize=14);\n",
+        "train[['timestamp', 'meter_reading']].set_index('timestamp').resample('D').mean()['meter_reading'].plot(ax=axes, label='By day', alpha=1).set_ylabel('Meter reading', fontsize=14);\n",
+        "train[['timestamp', 'meter_reading']].set_index('timestamp').resample('M').mean()['meter_reading'].plot(ax=axes, label='By Month', alpha=1).set_ylabel('Meter reading', fontsize=14);\n",
+        "axes.set_title('Mean Meter reading by hour, day and month', fontsize=16);\n",
+        "axes.legend();"
+      ],
+      "execution_count": 26,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "SyntaxError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;36m  File \u001b[0;32m\"<ipython-input-26-5edd2c314980>\"\u001b[0;36m, line \u001b[0;32m1\u001b[0m\n\u001b[0;31m    .1 Analyze mean energy consumption by time - by hours, days and months\u001b[0m\n\u001b[0m             ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m invalid syntax\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "LNju7ip0yamf",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 132
+        },
+        "outputId": "b901ade6-6a18-409f-bd60-386b56897740"
+      },
+      "source": [
+        "3.2 Analyze mean energy consumption by time - by hours, days and months by 'meter type'\n",
+        "By breaking down the overall mean energy consumption trend by 'meter type' we can get insight on how different forms of energy are being consumed through the year. We saw earlier that Steam meter type has the highest total and mean energy consumption, so we expect the trend for overall energy usage and that for steam meters should be pretty identical.\n",
+        "meter_dict = {0: 'electricity', 1: 'chilledwater', 2: 'steam', 3: 'hotwater'}\n",
+        "# Plot energy consumption by meter\n",
+        "plt.figure(figsize = (20,10))\n",
+        "for i in range(4):\n",
+        "    plt.subplot(2,2,i+1)\n",
+        "    train[train.meter == i][['timestamp','meter_reading']].set_index('timestamp').resample('H').mean()['meter_reading'].plot(title = meter_dict[i], label = 'By Hour')\n",
+        "    train[train.meter == i][['timestamp','meter_reading']].set_index('timestamp').resample('D').mean()['meter_reading'].plot(title = meter_dict[i], label = 'By Day')\n",
+        "    train[train.meter == i][['timestamp','meter_reading']].set_index('timestamp').resample('M').mean()['meter_reading'].plot(title = meter_dict[i], label = 'By Month')\n",
+        "    #plt.title('No 1099: Energy consumption by time by meter type')\n",
+        "    plt.legend()\n",
+        "    plt.tight_layout()\n",
+        "plt.show()"
+      ],
+      "execution_count": 27,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "SyntaxError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;36m  File \u001b[0;32m\"<ipython-input-27-082797246915>\"\u001b[0;36m, line \u001b[0;32m1\u001b[0m\n\u001b[0;31m    3.2 Analyze mean energy consumption by time - by hours, days and months by 'meter type'\u001b[0m\n\u001b[0m              ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m invalid syntax\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "9kkrTrsDydtK",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 132
+        },
+        "outputId": "49aa9f88-4393-42b1-a325-4ecbb8c1fba9"
+      },
+      "source": [
+        "Analysis of Meter Types:\n",
+        "\n",
+        "Steam : Closely mirrors the overall trend infact driving the overall trend - June Mid to Nov Mid - a big drop. Then a spike in Nov Mid. The scale of consumption in 10000's.\n",
+        "Electricity: Constant trend from Jan to May after which the consumption peaks to a new constant average - 15% higher than before. The scale of consumption is in smaller 100's\n",
+        "Chilled water: Gradual increase in consumption from Jan to Sep and then a spike in Sep/Oct before finally dropping to march levels by Dec. Probably this is end of summer and moving into winter.The scale of consumption is in 1000's\n",
+        "Hot water: Peak at start of year and continuously falling to a trough (20% of peak) by June-July and then again rising to original peak by end of year. Probably this is summer time when hot water is not needed that much. Scale is in larger 100's to lower 1000's.\n",
+        "Given that the trend is completely different for each meter type, should we be predicting consumption for each meter type separately?\n",
+        "So once building 1099 was removed, the steam energy trend follows a more continuous pattern starting high at Jan, reducing gradually to a low between June to Sep and climbing up again back to jan levels by the end of the year. This is also the same trend for hotwater usage - kinda nice given steam and hotwater are close cousins:)"
+      ],
+      "execution_count": 28,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "SyntaxError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;36m  File \u001b[0;32m\"<ipython-input-28-3155a8de916c>\"\u001b[0;36m, line \u001b[0;32m1\u001b[0m\n\u001b[0;31m    Analysis of Meter Types:\u001b[0m\n\u001b[0m              ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m invalid syntax\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "MCWYdZu_yhUo",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 132
+        },
+        "outputId": "cabe9a76-d8a5-469c-ad32-d14d962a281a"
+      },
+      "source": [
+        "3.3 Analyze Hourly Mean Energy Consumption by Site Id\n",
+        "plt.subplot(1,3,1)\n",
+        "\n",
+        "train.groupby('site_id')['meter_reading'].sum().sort_values(ascending = False).plot(kind = 'bar', figsize = (20,6), color = 'green', title = 'Total Energy consumption in sites 0 to 15')\n",
+        "plt.subplot(1,3,2)\n",
+        "train.groupby('site_id')['building_id'].nunique().sort_values(ascending = False).plot(kind = 'bar', figsize = (20,6), color = 'purple', title = 'Count of Buildings in sites 0 to 15')\n",
+        "plt.subplot(1,3,3)\n",
+        "train.groupby('site_id')['meter_reading'].mean().sort_values(ascending = False).plot(kind = 'bar', figsize = (20,6), color = 'green', title = 'Mean Energy consumption in sites 0 to 15')\n",
+        "\n",
+        "6 Sites - 13, 9, 2, 14, 3 and 15 are having about twice the number of buildings as others. Site 13 in particular seems to be 10x as compared to the next highest energy consuming site. We would expect the overall mean energy consumption pattern to be driven by site 13."
+      ],
+      "execution_count": 29,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "SyntaxError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;36m  File \u001b[0;32m\"<ipython-input-29-613c99869c7f>\"\u001b[0;36m, line \u001b[0;32m1\u001b[0m\n\u001b[0;31m    3.3 Analyze Hourly Mean Energy Consumption by Site Id\u001b[0m\n\u001b[0m              ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m invalid syntax\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "eMl7Fbe_yumG",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 132
+        },
+        "outputId": "0d347fd4-f783-4d9f-d991-914b99799ac1"
+      },
+      "source": [
+        "3.4 Check Time Series Hourly and Daily energy consumption by Site Id\n",
+        "# Plot energy consumption by site\n",
+        "plt.figure(figsize = (20,20))\n",
+        "for i in range(16):\n",
+        "    plt.subplot(8,2,i+1)\n",
+        "    train[train.site_id == i][['timestamp','meter_reading']].set_index('timestamp').resample('H').mean()['meter_reading'].plot(title = 'Site {}'.format(i), label = 'By Hour')\n",
+        "    train[train.site_id == i][['timestamp','meter_reading']].set_index('timestamp').resample('D').mean()['meter_reading'].plot(title = 'Site {}'.format(i), label = 'By Day')\n",
+        "    plt.legend()\n",
+        "    plt.tight_layout() # Add tight layout in loop to prevent overlapping text\n",
+        "plt.show()"
+      ],
+      "execution_count": 30,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "SyntaxError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;36m  File \u001b[0;32m\"<ipython-input-30-0ae4d4de358a>\"\u001b[0;36m, line \u001b[0;32m1\u001b[0m\n\u001b[0;31m    3.4 Check Time Series Hourly and Daily energy consumption by Site Id\u001b[0m\n\u001b[0m            ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m invalid syntax\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "qFTyaSvByyQr",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 152
+        },
+        "outputId": "400fdecc-59e9-47f5-fee5-9ae7393df456"
+      },
+      "source": [
+        "Bingo! The trend for Site 13 and for overall trend seems to be identical.I bet Site 13 should have more of Steam consumption as the patterns for overall trend, Steam and Site 13 all look alike.\n",
+        "\n",
+        "Lets look at a few sites which are interesting\n",
+        "\n",
+        "Site 6 - Major consumption happens only in Sep and Oct. looking at the scale of consumption, it could be only because of steam.\n",
+        "Site 8 - pretty normal trend - scale indicates electricity meter usage\n",
+        "Site 9 - mostly constant low usage (could be electricity) with some peaks in between (could be chilled water or steam)\n"
+      ],
+      "execution_count": 31,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "SyntaxError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;36m  File \u001b[0;32m\"<ipython-input-31-85dd113b0e48>\"\u001b[0;36m, line \u001b[0;32m1\u001b[0m\n\u001b[0;31m    Bingo! The trend for Site 13 and for overall trend seems to be identical.I bet Site 13 should have more of Steam consumption as the patterns for overall trend, Steam and Site 13 all look alike.\u001b[0m\n\u001b[0m         ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m invalid syntax\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "kIPCqmXxy4q-",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 221
+        },
+        "outputId": "63771f9d-8a9a-45a1-9511-c6fb37a0add7"
+      },
+      "source": [
+        "sites = [6,8,9]\n",
+        "for site in sites:\n",
+        "    print('site {}'.format(site), train[train.site_id == site].groupby('meter_name')['meter_reading'].sum())"
+      ],
+      "execution_count": 32,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "NameError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-32-0999a7ecdaab>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[1;32m      1\u001b[0m \u001b[0msites\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;34m[\u001b[0m\u001b[0;36m6\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;36m8\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;36m9\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      2\u001b[0m \u001b[0;32mfor\u001b[0m \u001b[0msite\u001b[0m \u001b[0;32min\u001b[0m \u001b[0msites\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m----> 3\u001b[0;31m     \u001b[0mprint\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'site {}'\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mformat\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0msite\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mtrain\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0mtrain\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0msite_id\u001b[0m \u001b[0;34m==\u001b[0m \u001b[0msite\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mgroupby\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'meter_name'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m'meter_reading'\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0msum\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m: name 'train' is not defined"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "tmrrk4HJy5X4",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 132
+        },
+        "outputId": "e66d0e7a-083b-4ce0-e227-1dbe88c691f2"
+      },
+      "source": [
+        "3.5 Energy consumption by Site by meter type\n",
+        "pivot_df = train.groupby(['site_id','meter_name'])['meter_reading'].mean().sort_values(ascending = False).reset_index()\n",
+        "pivot_df.head()\n",
+        "pivot_df = pivot_df.pivot(index='site_id', columns='meter_name', values='meter_reading')\n",
+        "pivot_df['AllMeters'] = pivot_df.sum(axis = 1)\n",
+        "pivot_df.sort_values('AllMeters', ascending = False).drop('AllMeters',axis = 1).plot(kind = 'bar', figsize = (20,10), colormap = 'Set1', title = 'Mean Energy consumption by Site Id by meter', stacked = True)\n",
+        "plt.tight_layout()\n",
+        "\n",
+        "\n",
+        "## Show values in bar plot\n",
+        "#ax = pivot_df.sort_values('AllMeters', ascending = False).drop('AllMeters',axis = 1).plot(kind = 'bar', figsize = (20,10), colormap = 'Set1', title = 'Mean Energy consumption by Site Id by meter', stacked = True)\n",
+        "#for p in ax.patches:\n",
+        " #   ax.annotate(str(p.get_height()), (p.get_x() * 1.005, p.get_height() * 1.005))\n",
+        "#plt.tight_layout() "
+      ],
+      "execution_count": 33,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "SyntaxError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;36m  File \u001b[0;32m\"<ipython-input-33-2c7a92182e38>\"\u001b[0;36m, line \u001b[0;32m1\u001b[0m\n\u001b[0;31m    3.5 Energy consumption by Site by meter type\u001b[0m\n\u001b[0m             ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m invalid syntax\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "vg3eelamy9ab",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 152
+        },
+        "outputId": "4e8fcc80-361d-4d90-cd46-8ae30a647603"
+      },
+      "source": [
+        "We can clearly see that Except for Site 13 all other sites do not have mean steam energy usage that much. That is why other sites show a different trend from the Steam meter consumption trend.\n",
+        "\n",
+        "Finally lets get down to building level. Lets check the general trend of energy consumption by buildings.\n",
+        "\n",
+        "train.groupby('building_id')['meter_reading'].mean().plot(figsize = (20,6), color = 'green', title = 'Mean Energy consumption in all 1449 buildings')"
+      ],
+      "execution_count": 34,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "SyntaxError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;36m  File \u001b[0;32m\"<ipython-input-34-ae644b65d8fe>\"\u001b[0;36m, line \u001b[0;32m1\u001b[0m\n\u001b[0;31m    We can clearly see that Except for Site 13 all other sites do not have mean steam energy usage that much. That is why other sites show a different trend from the Steam meter consumption trend.\u001b[0m\n\u001b[0m         ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m invalid syntax\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "7oNy5jiAzBMH",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 167
+        },
+        "outputId": "4171b63d-000a-4ae1-905f-dc45bb71f6e8"
+      },
+      "source": [
+        "train.groupby('building_id')['meter_reading'].mean().sort_values(ascending = False)[:10]"
+      ],
+      "execution_count": 35,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "NameError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-35-1b6ef46c2899>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0mtrain\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mgroupby\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'building_id'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m'meter_reading'\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mmean\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0msort_values\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mascending\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;32mFalse\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;36m10\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m: name 'train' is not defined"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "mA2h9iWZzGBY",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 204
+        },
+        "outputId": "67d1e155-80c7-4821-ed89-fa2ae4093876"
+      },
+      "source": [
+        "train[train.building_id == 1099].groupby('meter_name')['meter_reading'].mean().plot(kind = 'bar', figsize = (6,4), color = 'green', title = 'Mean Energy consumption for Building 1099 by meter')\n",
+        "print('% Steam Consumption for Building 1099 out of total energy consumption is :',(train[train.building_id == 1099].groupby('meter_name')['meter_reading'].mean()[1] / train[train.building_id == 1099].groupby('meter_name')['meter_reading'].mean().sum())*100,'%')\n"
+      ],
+      "execution_count": 37,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "NameError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-37-2e7e2b0c1d05>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0mtrain\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0mtrain\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mbuilding_id\u001b[0m \u001b[0;34m==\u001b[0m \u001b[0;36m1099\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mgroupby\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'meter_name'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m'meter_reading'\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mmean\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mplot\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mkind\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;34m'bar'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mfigsize\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;34m(\u001b[0m\u001b[0;36m6\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;36m4\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mcolor\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;34m'green'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mtitle\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;34m'Mean Energy consumption for Building 1099 by meter'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m      2\u001b[0m \u001b[0mprint\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'% Steam Consumption for Building 1099 out of total energy consumption is :'\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mtrain\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0mtrain\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mbuilding_id\u001b[0m \u001b[0;34m==\u001b[0m \u001b[0;36m1099\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mgroupby\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'meter_name'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m'meter_reading'\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mmean\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;36m1\u001b[0m\u001b[0;34m]\u001b[0m \u001b[0;34m/\u001b[0m \u001b[0mtrain\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0mtrain\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mbuilding_id\u001b[0m \u001b[0;34m==\u001b[0m \u001b[0;36m1099\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mgroupby\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'meter_name'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m'meter_reading'\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mmean\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0msum\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m*\u001b[0m\u001b[0;36m100\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;34m'%'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;31mNameError\u001b[0m: name 'train' is not defined"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "OhgZtiBtzL12",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 132
+        },
+        "outputId": "891c44e8-08bd-4c65-9a3a-7f5e615f0b52"
+      },
+      "source": [
+        "2)]['meter_reading'].sum()\n",
+        "steam_others = train[(train.building_id != 1099) & (train.meter == 2)]['meter_reading'].sum()\n",
+        "steam_total = train[train.meter == 2]['meter_reading'].sum()\n",
+        "print('% of Steam Consumption for Building 1099 out of total for all buildings',100*steam_1099/steam_total)"
+      ],
+      "execution_count": 38,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "SyntaxError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;36m  File \u001b[0;32m\"<ipython-input-38-aceb68f9d271>\"\u001b[0;36m, line \u001b[0;32m1\u001b[0m\n\u001b[0;31m    2)]['meter_reading'].sum()\u001b[0m\n\u001b[0m     ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m invalid syntax\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "RtgjEU0jzUHH",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 152
+        },
+        "outputId": "8027d4e7-5417-4c85-a070-48dff4691776"
+      },
+      "source": [
+        "Quite clearly Building 1099 is dominating the overall steam consumption.Hence it may be better to remove just Building 1099 rather than remove entire steam consumption to understand overall energy usage trend."
+      ],
+      "execution_count": 39,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "SyntaxError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;36m  File \u001b[0;32m\"<ipython-input-39-49ba320f1687>\"\u001b[0;36m, line \u001b[0;32m1\u001b[0m\n\u001b[0;31m    Quite clearly Building 1099 is dominating the overall steam consumption.Hence it may be better to remove just Building 1099 rather than remove entire steam consumption to understand overall energy usage trend.\u001b[0m\n\u001b[0m                ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m invalid syntax\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "pwuYKkMrzWj6",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 132
+        },
+        "outputId": "ac8aa358-8c33-4d1b-b1e7-c03065fdc488"
+      },
+      "source": [
+        "ow does Site 13 energy consumption look after removing building 1099"
+      ],
+      "execution_count": 40,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "SyntaxError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;36m  File \u001b[0;32m\"<ipython-input-40-edd3b53a35cc>\"\u001b[0;36m, line \u001b[0;32m1\u001b[0m\n\u001b[0;31m    ow does Site 13 energy consumption look after removing building 1099\u001b[0m\n\u001b[0m          ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m invalid syntax\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "_CYb7hOYzZqp",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 239
+        },
+        "outputId": "b3d0edc7-93d1-4b9e-9d1a-9f109b36223b"
+      },
+      "source": [
+        "plt.figure(figsize = (20,10))\n",
+        "train[train.building_id != 1099][train.site_id == 13][['timestamp', 'meter_reading']].set_index('timestamp').resample('H').mean()['meter_reading'].plot(title = 'Site 13 - No 1099 - Energy trend', label = 'By Hour')\n",
+        "train[train.building_id != 1099][train.site_id == 13][['timestamp', 'meter_reading']].set_index('timestamp').resample('D').mean()['meter_reading'].plot(label = 'By Day')\n",
+        "plt.legend()"
+      ],
+      "execution_count": 41,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "NameError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-41-8f0378934496>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0mplt\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mfigure\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mfigsize\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;34m(\u001b[0m\u001b[0;36m20\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;36m10\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m      2\u001b[0m \u001b[0mtrain\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0mtrain\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mbuilding_id\u001b[0m \u001b[0;34m!=\u001b[0m \u001b[0;36m1099\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0mtrain\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0msite_id\u001b[0m \u001b[0;34m==\u001b[0m \u001b[0;36m13\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m'timestamp'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'meter_reading'\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mset_index\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'timestamp'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mresample\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'H'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mmean\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m'meter_reading'\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mplot\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mtitle\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;34m'Site 13 - No 1099 - Energy trend'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mlabel\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;34m'By Hour'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      3\u001b[0m \u001b[0mtrain\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0mtrain\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mbuilding_id\u001b[0m \u001b[0;34m!=\u001b[0m \u001b[0;36m1099\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0mtrain\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0msite_id\u001b[0m \u001b[0;34m==\u001b[0m \u001b[0;36m13\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m'timestamp'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'meter_reading'\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mset_index\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'timestamp'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mresample\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'D'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mmean\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m'meter_reading'\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mplot\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mlabel\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;34m'By Day'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      4\u001b[0m \u001b[0mplt\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mlegend\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;31mNameError\u001b[0m: name 'plt' is not defined"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "b_XSmz42zeFk",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 187
+        },
+        "outputId": "7d11d0c1-2141-4f85-8b98-4df5b5d1377f"
+      },
+      "source": [
+        "train[train.building_id != 1099].groupby('building_id')['meter_reading'].mean().plot(figsize = (20,6), color = 'green', title = 'Mean Energy consumption in all buildings except Building 1099')"
+      ],
+      "execution_count": 42,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "NameError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-42-ef3ceb4b4425>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0mtrain\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0mtrain\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mbuilding_id\u001b[0m \u001b[0;34m!=\u001b[0m \u001b[0;36m1099\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mgroupby\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'building_id'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m'meter_reading'\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mmean\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mplot\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mfigsize\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;34m(\u001b[0m\u001b[0;36m20\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;36m6\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mcolor\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;34m'green'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mtitle\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;34m'Mean Energy consumption in all buildings except Building 1099'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m: name 'train' is not defined"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "fkuXbBG8zhTs",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 132
+        },
+        "outputId": "a778a92f-c167-4027-c6a2-e8eb31ed097b"
+      },
+      "source": [
+        "\n",
+        "Energy consumption trend just for Steam meters¶\n",
+        "fig, axes = plt.subplots(1, 1, figsize=(15, 6), dpi=100)\n",
+        "train[train.meter == 2][['timestamp', 'meter_reading']].set_index('timestamp').resample('H').mean()['meter_reading'].plot(ax=axes, label='By hour', alpha=0.8).set_ylabel('Meter reading', fontsize=14);\n",
+        "train[train.meter == 2][['timestamp', 'meter_reading']].set_index('timestamp').resample('D').mean()['meter_reading'].plot(ax=axes, label='By day', alpha=1).set_ylabel('Meter reading', fontsize=14);\n",
+        "train[train.meter == 2][['timestamp', 'meter_reading']].set_index('timestamp').resample('M').mean()['meter_reading'].plot(ax=axes, label='By Month', alpha=1).set_ylabel('Meter reading', fontsize=14);\n",
+        "axes.set_title('Only Steam consumption : Mean Meter reading by hour, day and month', fontsize=16);\n",
+        "axes.legend();"
+      ],
+      "execution_count": 43,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "SyntaxError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;36m  File \u001b[0;32m\"<ipython-input-43-d91bfb0bc1c6>\"\u001b[0;36m, line \u001b[0;32m2\u001b[0m\n\u001b[0;31m    Energy consumption trend just for Steam meters¶\u001b[0m\n\u001b[0m                     ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m invalid syntax\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "_mJ5WdwezuqR",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 221
+        },
+        "outputId": "8290fbe4-8c8a-4065-d346-898241c52dcb"
+      },
+      "source": [
+        "fig, axes = plt.subplots(1, 1, figsize=(15, 6), dpi=100)\n",
+        "train[train.building_id == 1099][['timestamp', 'meter_reading']].set_index('timestamp').resample('H').mean()['meter_reading'].plot(label='By hour', alpha=0.8, title = 'Energy consumption for Building 1099').set_ylabel('Meter reading', fontsize=14);\n",
+        "train[train.building_id == 1099][['timestamp', 'meter_reading']].set_index('timestamp').resample('D').mean()['meter_reading'].plot(label='By Day', alpha=0.8, title = 'Energy consumption for Building 1099').set_ylabel('Meter reading', fontsize=14);"
+      ],
+      "execution_count": 44,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "NameError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-44-bd1eae0759f0>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0mfig\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0maxes\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mplt\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0msubplots\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;36m1\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;36m1\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mfigsize\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;36m15\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;36m6\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mdpi\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;36m100\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m      2\u001b[0m \u001b[0mtrain\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0mtrain\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mbuilding_id\u001b[0m \u001b[0;34m==\u001b[0m \u001b[0;36m1099\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m'timestamp'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'meter_reading'\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mset_index\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'timestamp'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mresample\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'H'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mmean\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m'meter_reading'\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mplot\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mlabel\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;34m'By hour'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0malpha\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;36m0.8\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mtitle\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;34m'Energy consumption for Building 1099'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mset_ylabel\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'Meter reading'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mfontsize\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;36m14\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m;\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      3\u001b[0m \u001b[0mtrain\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0mtrain\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mbuilding_id\u001b[0m \u001b[0;34m==\u001b[0m \u001b[0;36m1099\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m'timestamp'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'meter_reading'\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mset_index\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'timestamp'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mresample\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'D'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mmean\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m'meter_reading'\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mplot\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mlabel\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;34m'By Day'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0malpha\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;36m0.8\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mtitle\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;34m'Energy consumption for Building 1099'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mset_ylabel\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'Meter reading'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mfontsize\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;36m14\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m;\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;31mNameError\u001b[0m: name 'plt' is not defined"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "mk5qzp5TzvQ8",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 187
+        },
+        "outputId": "94118de3-e91e-4d97-fec1-262556a252b8"
+      },
+      "source": [
+        "print('Year Built for Building 1099 is :',building_metadata[building_metadata.building_id == 1099].year_built.values)"
+      ],
+      "execution_count": 45,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "NameError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-45-339f18c43573>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0mprint\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'Year Built for Building 1099 is :'\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0mbuilding_metadata\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0mbuilding_metadata\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mbuilding_id\u001b[0m \u001b[0;34m==\u001b[0m \u001b[0;36m1099\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0myear_built\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mvalues\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m: name 'building_metadata' is not defined"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "fRcZuYTJzyVJ",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 187
+        },
+        "outputId": "0986ac6e-8b71-43f9-cc88-1ea164a089f4"
+      },
+      "source": [
+        "print('Floor count for Building 1099 is :',building_metadata[building_metadata.building_id == 1099].floor_count.values)"
+      ],
+      "execution_count": 46,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "NameError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-46-b169780c058c>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0mprint\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'Floor count for Building 1099 is :'\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0mbuilding_metadata\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0mbuilding_metadata\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mbuilding_id\u001b[0m \u001b[0;34m==\u001b[0m \u001b[0;36m1099\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mfloor_count\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mvalues\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m: name 'building_metadata' is not defined"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "MCg6rNKnz0Tv",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        "1.1A Energy Consumption by Primary Use - Full Data\n",
+        "plt.subplot(1,3,2)\n",
+        "train.groupby('primary_use')['building_id'].nunique().sort_values(ascending = False).plot(kind = 'bar', figsize = (20,6), color = 'purple', title = 'Count of Buildings by Primary use')\n",
+        "plt.subplot(1,3,1)\n",
+        "train.groupby('primary_use')['meter_reading'].sum().sort_values(ascending = False).plot(kind = 'bar', figsize = (20,6), color = 'green', title = 'Total Energy consumption by Primary use')\n",
+        "plt.subplot(1,3,3)\n",
+        "train.groupby('primary_use')['meter_reading'].mean().sort_values(ascending = False).plot(kind = 'bar', figsize = (20,6), color = 'green', title = 'Mean Energy consumption by Primary use')\n",
+        "plt.tight_layout()"
+      ],
+      "execution_count": 0,
+      "outputs": []
+    }
+  ]
+}
